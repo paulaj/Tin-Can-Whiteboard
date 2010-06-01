@@ -10,7 +10,7 @@
 
 
 @implementation WhiteboardView
-//@synthesize lastLocation;
+@synthesize lastLocation;
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
@@ -72,9 +72,9 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	NSLog(@"I got a touch");
 	UITouch *touch = [[event allTouches] anyObject];
-	lastLocation = [touch locationInView:self];
-	CGPointMake(lastLocation.x,lastLocation.y);
-	(@" pos= %f,%f,", lastLocation.x, lastLocation.y); 
+	self.lastLocation = [touch locationInView:self];
+	//CGPointMake(self.lastLocation.x,self.lastLocation.y);
+	NSLog(@" pos= %f,%f,", self.lastLocation.x, self.lastLocation.y); 
 }
 
 

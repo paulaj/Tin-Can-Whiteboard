@@ -14,5 +14,7 @@
 	
 
 }
-@property (nonatomic, assign) IBOutlet CGPoint *lastLocation;
+
+@property (nonatomic, assign) CGPoint lastLocation;
+
 @end
