@@ -3,7 +3,7 @@
 //  Tin-Can-Whiteboard
 //
 //  Created by Paula Jacobs on 6/1/10.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
+//  Copyright MIT Media Lab 2010. All rights reserved.
 //
 
 #import "Tin_Can_WhiteboardAppDelegate.h"

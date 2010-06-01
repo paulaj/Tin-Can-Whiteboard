@@ -3,29 +3,22 @@
 //  Tin-Can-Whiteboard
 //
 //  Created by Paula Jacobs on 6/1/10.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
+//  Copyright MIT Media Lab 2010. All rights reserved.
 //
 
 #import "Tin_Can_WhiteboardViewController.h"
+#import "WhiteboardView.h"
 
 @implementation Tin_Can_WhiteboardViewController
 
 
-/*
-// The designated initializer. Override to perform setup that is required before the view is loaded.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
 
-/*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
+	NSLog(@"Loading View");
+	self.view = [[WhiteboardView alloc] initWithFrame:CGRectMake(0, 0, 768, 1024)];
 }
-*/
+
 
 
 /*
