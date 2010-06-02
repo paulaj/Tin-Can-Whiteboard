@@ -48,7 +48,7 @@
 //		}
 		CGContextMoveToPoint(ctx, lastLocation.x, lastLocation.y);
 		CGContextAddLineToPoint (ctx, location.x, location.y);
-		CGContextMoveToPoint(ctx, lastLocation.x, lastLocation.y);
+		//CGContextMoveToPoint(ctx, lastLocation.x, lastLocation.y);
 		CGContextStrokePath(ctx);
 		CGContextFillPath(ctx);
 		}	
@@ -62,7 +62,7 @@
 	lastLocation = [touch locationInView:self];
 	//CGPointMake(lastLocation.x,lastLocation.y);
 	NSLog(@"touch pos= %f,%f,", lastLocation.x, lastLocation.y); 
-	[self setNeedsDisplay];
+	
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -75,7 +75,7 @@
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
 	UITouch *touch = [[event allTouches] anyObject];
     location = [touch locationInView:self];
-	
+	[self setNeedsDisplay];
 	NSLog(@"I've ended");
 	
 
