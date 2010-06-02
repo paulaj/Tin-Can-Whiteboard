@@ -10,11 +10,12 @@
 
 
 @implementation WhiteboardView
-@synthesize lastLocation;
+//@synthesize lastLocation;
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
-        self.lastLocation =CGPointMake(0.0, 0.0) ;
+        lastLocation =CGPointMake(0.0, 0.0);
+		location =CGPointMake(0.0, 0.0);
     }
     return self;
 }
@@ -31,54 +32,54 @@
 		
 		CGContextFillRect(ctx, CGRectMake(0, 0, 768, 1024));
 		
-		/*
-		if(hover)
-            CGContextSetFillColorWithColor(ctx, [self.color colorDarkenedByPercent:0.3].CGColor);
-		else
-			CGContextSetFillColorWithColor(ctx, self.color.CGColor);
-		*/
+	
 		CGContextSetRGBFillColor(ctx, 1.0, 0, 0, 1);
 		CGPoint a=CGPointMake(0.0, 0.0);
-		if(CGPointEqualToPoint(self.lastLocation, a)) {
+		if(CGPointEqualToPoint(lastLocation, a)|CGPointEqualToPoint(location, a)) {
+			NSLog(@"found equal point");
 		}
 		else {
-		CGContextAddEllipseInRect(ctx, CGRectMake(self.lastLocation.x-50, self.lastLocation.y-50, 100, 100));
+//			
+//			NSLog(@"painting a new point: %f,%f", lastLocation.x, lastLocation.y);
+//			
+//		CGContextAddEllipseInRect(ctx, CGRectMake(lastLocation.x-50, lastLocation.y-50, 100, 100));
+//		CGContextFillPath(ctx);
+//
+//		}
+		CGContextMoveToPoint(ctx, lastLocation.x, lastLocation.y);
+		CGContextAddLineToPoint (ctx, location.x, location.y);
+		CGContextMoveToPoint(ctx, lastLocation.x, lastLocation.y);
+		CGContextStrokePath(ctx);
 		CGContextFillPath(ctx);
-        
-		//CGContextSetRGBFillColor(ctx, 1.0, 1.0, 1.0, 1.0);
-		//CGContextSetRGBStrokeColor(ctx, 1.0, 0.0, 0.0, 1.0);
-
-
-		//UIFont *f = [UIFont boldSystemFontOfSize:18];
-		//CGSize nameSize = [[self.participant.name uppercaseString] sizeWithFont:f];
-		
-		//[[self.participant.name uppercaseString] drawAtPoint:CGPointMake(-nameSize.width/2, -nameSize.height/2-55) withFont:f];
-		
-		//CGContextSetFillColorWithColor(ctx, self.color.CGColor);
-		
-		//CGContextRotateCTM(ctx, M_PI/10);
-		
-		// Now, draw a circle outside the radius for each todo object.
-		//for(int i=0; i<[self.participant.assignedTodos count]; i++) {
-			// Draw a circle at zero e
-			//CGContextRotateCTM(ctx, M_PI/10);
-			//CGContextAddEllipseInRect(ctx, CGRectMake(-140, 0, 30, 30));
-			//CGContextFillPath(ctx);
-		}
+		}	
 	}
-	
+	//lastLocation =CGPointMake(0.0, 0.0);
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	NSLog(@"I got a touch");
 	UITouch *touch = [[event allTouches] anyObject];
-	self.lastLocation = [touch locationInView:self];
-	//CGPointMake(self.lastLocation.x,self.lastLocation.y);
-	NSLog(@" pos= %f,%f,", self.lastLocation.x, self.lastLocation.y); 
+	lastLocation = [touch locationInView:self];
+	//CGPointMake(lastLocation.x,lastLocation.y);
+	NSLog(@"touch pos= %f,%f,", lastLocation.x, lastLocation.y); 
 	[self setNeedsDisplay];
 }
 
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+	//UITouch *touch = [[event allTouches] anyObject];
+    //CGPoint location = [touch locationInView:self];
+	NSLog(@"I'm moving");
+	
+}
 
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+	UITouch *touch = [[event allTouches] anyObject];
+    location = [touch locationInView:self];
+	
+	NSLog(@"I've ended");
+	
+
+}
 - (void)dealloc {
     [super dealloc];
 }

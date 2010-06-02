@@ -11,10 +11,9 @@
 
 @interface WhiteboardView : UIView {
 	CGPoint lastLocation;
-	
-
+	CGPoint location;
 }
 
-@property (nonatomic, assign) CGPoint lastLocation;
+//@property (nonatomic, assign) CGPoint lastLocation;
 
 @end
