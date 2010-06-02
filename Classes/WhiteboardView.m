@@ -66,10 +66,10 @@
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-	//UITouch *touch = [[event allTouches] anyObject];
-    //CGPoint location = [touch locationInView:self];
+	UITouch *touch = [[event allTouches] anyObject];
+	location = [touch locationInView:self];
 	NSLog(@"I'm moving");
-	
+	[self setNeedsDisplay];
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
