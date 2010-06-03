@@ -16,7 +16,7 @@
     if ((self = [super initWithFrame:frame])) {
         lastLocation =CGPointMake(0.0, 0.0);
 		location =CGPointMake(0.0, 0.0);
-		letsDraw;
+		letsDraw = [[NSMutableArray array] retain];
     }
     return self;
 }
@@ -24,38 +24,50 @@
 - (void)drawRect:(CGRect)rect {
     // Drawing code
 	CGContextRef ctx = UIGraphicsGetCurrentContext();
-	
+	//if we have a context
 	if(ctx != nil) {
         
 		
 		CGContextSetRGBFillColor(ctx, 0, 0, 0, 1);
 		CGContextSetRGBStrokeColor(ctx, 0, 0, 1.0, 1);
-		
 		CGContextFillRect(ctx, CGRectMake(0, 0, 768, 1024));
-		
-	
 		CGContextSetRGBFillColor(ctx, 1.0, 0, 0, 1);
-		CGPoint a=CGPointMake(0.0, 0.0);
-		if(CGPointEqualToPoint(lastLocation, a)|CGPointEqualToPoint(location, a)) {
-			//NSLog(@"found equal point");
+		NSLog(@"current size = %d", [letsDraw count]);
+		if ([letsDraw count] >0) { //under the condition that there is something in our Array
+			for (int c=0; c< [letsDraw count]; c++) {//as long as we don't go past the number of available objects
+				NSArray *storedPoints=[ letsDraw objectAtIndex:c];//lets name the array at that index 
+				
+				if ([storedPoints count] >2) { //if we have at least one full x,y pair
+					//store them as a float in a variable so we can use them
+					float storedX=[[storedPoints objectAtIndex:0] floatValue];
+					float storedY=[[storedPoints objectAtIndex:1] floatValue];
+					CGContextBeginPath(ctx);//Lets start a path
+					CGContextMoveToPoint(ctx, storedX, storedY);// and start where we first touched
+					
+					for (int i =2; i < [storedPoints count]; i+=2) { // as long as there are xy pairs left in our array
+						//store them as a float in a variable so we can use them
+						storedX=[[storedPoints objectAtIndex:i] floatValue];
+						storedY=[[storedPoints objectAtIndex:i+1] floatValue];
+						CGContextAddLineToPoint (ctx, storedX, storedY);//lets create a line between them, then move to the end of that line		 
+					}
+					NSLog(@"I'm about to draw");
+					CGContextStrokePath(ctx);			 
+				}
+			}
 		}
-		else {
-		CGContextMoveToPoint(ctx, lastLocation.x, lastLocation.y);
-		CGContextAddLineToPoint (ctx, location.x, location.y);
-		
-		CGContextStrokePath(ctx);
-		CGContextFillPath(ctx);
-		}	
 	}
-	
 }
 
-
+//Begins Touches
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	
 	UITouch *touch = [[event allTouches] anyObject];
+	//Stores current location of touch in our instance variable lastLocation
 	lastLocation = [touch locationInView:self];
-	[letsDraw addObject:[NSMutableArray array]]; 
+	//Creates an Array and adds it into our initial Array letsDraw
+	[letsDraw addObject:[[NSMutableArray alloc] initWithCapacity:4]]; 
+	NSLog(@"%@", [letsDraw lastObject]);
+	//Adds the CGPoint x,y coordininates into the array (must be done this way because CGPoints are not Objects
 	[[letsDraw lastObject] addObject: [NSNumber numberWithFloat: lastLocation.x]];
 	[[letsDraw lastObject] addObject: [NSNumber numberWithFloat: lastLocation.y]];
 	
@@ -63,24 +75,28 @@
 	NSLog(@"touch pos= %f,%f,", lastLocation.x, lastLocation.y);
 	
 }
-
+//Tracks moved touches
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
 	UITouch *touch = [[event allTouches] anyObject];
+	//Stores every recorded movement CGPoint in the instance variable location
 	location = [touch locationInView:self];
+	//Adds the x,y coordinates of the CGPoint location
 	[[letsDraw lastObject] addObject: [NSNumber numberWithFloat: location.x]];
 	[[letsDraw lastObject] addObject: [NSNumber numberWithFloat: location.y]];
-	[self setNeedsDisplay];
+	[self setNeedsDisplay];//This displays what we've done so far, letting us draw as we go.
 	NSLog(@"I'm moving");
 	
 }
-
+//Ends touches
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
 	UITouch *touch = [[event allTouches] anyObject];
+	//Stores touch in location
     location = [touch locationInView:self];
+	//adds to array
 	[[letsDraw lastObject] addObject:[NSNumber numberWithFloat: location.x]];
 	[[letsDraw lastObject] addObject:[NSNumber numberWithFloat: location.y]];
-	[self setNeedsDisplay];
-	NSLog(@"I've ended");
+	[self setNeedsDisplay];// and displays 
+	NSLog(@"I've ended: %@", [letsDraw lastObject]);
 	
 
 }
@@ -90,6 +106,7 @@
 
 - (void)dealloc {
     [super dealloc];
+	[letsDraw release];
 }
 
 
