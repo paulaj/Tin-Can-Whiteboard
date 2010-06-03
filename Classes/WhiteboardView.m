@@ -7,7 +7,7 @@
 //
 
 #import "WhiteboardView.h"
-
+#import <math.h>
 
 @implementation WhiteboardView
 //@synthesize lastLocation;
@@ -19,6 +19,8 @@
 		myArray = [[NSMutableArray array] retain];
 		isErasing=true;
 		myColor= [UIColor blueColor];
+		myDistance=0.0;
+		
     }
     return self;
 }
@@ -73,11 +75,22 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	
 	UITouch *touch = [[event allTouches] anyObject];
-	if  ([[event allTouches] count]==1){
-		isErasing=false;
+	//Stores current location of touch in our instance variable lastLocation
+	lastLocation = [touch locationInView:self];
+	if ([[event allTouches] count]==2){
+		CGPoint point1=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
+		CGPoint point2=[[[[event allTouches] allObjects] objectAtIndex:1] locationInView:self];
+		myDistance = sqrt(pow(((point2.x) - (point1.x)), 2) + pow(((point2.y) - (point1.y)), 2));
+		if (myDistance<=300){				
+			isErasing=true;
+			//lastLocation= MakeCGPoint(
+		}
+		else{
+			isErasing=false;
+		}
 	}
-	if ([[event allTouches] count]==2) {
-		isErasing=true;
+	else{
+		isErasing=false;
 	}
 	if (isErasing){
 		myColor=[UIColor blackColor];
@@ -85,8 +98,7 @@
 	else {
 		myColor=[UIColor blueColor];
 	}
-	//Stores current location of touch in our instance variable lastLocation
-	lastLocation = [touch locationInView:self];
+	
 	//Creates an Array and adds it into our initial Array, then adds a color to it
 	[myArray addObject:[[NSMutableArray alloc] initWithCapacity:4]];
 	[[myArray lastObject] addObject: myColor];

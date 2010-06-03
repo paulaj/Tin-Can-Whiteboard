@@ -15,6 +15,7 @@
 	NSMutableArray *myArray;
 	Boolean isErasing;
 	UIColor *myColor;
+	CGFloat myDistance;
 }
 
 //@property (nonatomic, assign) CGPoint lastLocation;
