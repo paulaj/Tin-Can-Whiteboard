@@ -12,6 +12,7 @@
 @interface WhiteboardView : UIView {
 	CGPoint lastLocation;
 	CGPoint location;
+	NSMutableArray *letsDraw;
 }
 
 //@property (nonatomic, assign) CGPoint lastLocation;

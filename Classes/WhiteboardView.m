@@ -16,6 +16,7 @@
     if ((self = [super initWithFrame:frame])) {
         lastLocation =CGPointMake(0.0, 0.0);
 		location =CGPointMake(0.0, 0.0);
+		letsDraw;
     }
     return self;
 }
@@ -36,50 +37,57 @@
 		CGContextSetRGBFillColor(ctx, 1.0, 0, 0, 1);
 		CGPoint a=CGPointMake(0.0, 0.0);
 		if(CGPointEqualToPoint(lastLocation, a)|CGPointEqualToPoint(location, a)) {
-			NSLog(@"found equal point");
+			//NSLog(@"found equal point");
 		}
 		else {
-//			
-//			NSLog(@"painting a new point: %f,%f", lastLocation.x, lastLocation.y);
-//			
-//		CGContextAddEllipseInRect(ctx, CGRectMake(lastLocation.x-50, lastLocation.y-50, 100, 100));
-//		CGContextFillPath(ctx);
-//
-//		}
 		CGContextMoveToPoint(ctx, lastLocation.x, lastLocation.y);
 		CGContextAddLineToPoint (ctx, location.x, location.y);
-		//CGContextMoveToPoint(ctx, lastLocation.x, lastLocation.y);
+		
 		CGContextStrokePath(ctx);
 		CGContextFillPath(ctx);
 		}	
 	}
-	//lastLocation =CGPointMake(0.0, 0.0);
+	
 }
 
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	NSLog(@"I got a touch");
+	
 	UITouch *touch = [[event allTouches] anyObject];
 	lastLocation = [touch locationInView:self];
-	//CGPointMake(lastLocation.x,lastLocation.y);
-	NSLog(@"touch pos= %f,%f,", lastLocation.x, lastLocation.y); 
+	[letsDraw addObject:[NSMutableArray array]]; 
+	[[letsDraw lastObject] addObject: [NSNumber numberWithFloat: lastLocation.x]];
+	[[letsDraw lastObject] addObject: [NSNumber numberWithFloat: lastLocation.y]];
+	
+	NSLog(@"I got a touch");
+	NSLog(@"touch pos= %f,%f,", lastLocation.x, lastLocation.y);
 	
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
 	UITouch *touch = [[event allTouches] anyObject];
 	location = [touch locationInView:self];
-	NSLog(@"I'm moving");
+	[[letsDraw lastObject] addObject: [NSNumber numberWithFloat: location.x]];
+	[[letsDraw lastObject] addObject: [NSNumber numberWithFloat: location.y]];
 	[self setNeedsDisplay];
+	NSLog(@"I'm moving");
+	
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
 	UITouch *touch = [[event allTouches] anyObject];
     location = [touch locationInView:self];
+	[[letsDraw lastObject] addObject:[NSNumber numberWithFloat: location.x]];
+	[[letsDraw lastObject] addObject:[NSNumber numberWithFloat: location.y]];
 	[self setNeedsDisplay];
 	NSLog(@"I've ended");
 	
 
 }
+
+
+
+
 - (void)dealloc {
     [super dealloc];
 }
