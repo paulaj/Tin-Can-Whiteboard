@@ -12,10 +12,9 @@
 @interface WhiteboardView : UIView {
 	CGPoint lastLocation;
 	CGPoint location;
-	NSMutableArray *letsDraw;
-	NSMutableArray *letsErase;
 	NSMutableArray *myArray;
 	Boolean isErasing;
+	UIColor *myColor;
 }
 
 //@property (nonatomic, assign) CGPoint lastLocation;
