@@ -13,6 +13,9 @@
 	CGPoint lastLocation;
 	CGPoint location;
 	NSMutableArray *letsDraw;
+	NSMutableArray *letsErase;
+	NSMutableArray *myArray;
+	Boolean isErasing;
 }
 
 //@property (nonatomic, assign) CGPoint lastLocation;
