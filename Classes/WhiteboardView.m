@@ -17,7 +17,7 @@
         lastLocation =CGPointMake(0.0, 0.0);
 		location =CGPointMake(0.0, 0.0);
 		myArray = [[NSMutableArray array] retain];
-		isErasing=false;
+		isErasing=true;
 		myColor= [UIColor blueColor];
     }
     return self;
@@ -44,7 +44,7 @@
 				}
 				if ([[storedInfo objectAtIndex:0]isEqual:[UIColor blackColor]]) {
 					CGContextSetRGBStrokeColor(ctx, 0, 0, 0, 1);
-					CGContextSetLineWidth(ctx, 5);
+					CGContextSetLineWidth(ctx, 20);
 				}
 				if ([storedPoints count] >2) { //if we have at least one full x,y pair
 					//store them as a float in a variable so we can use them
@@ -71,14 +71,20 @@
 
 //Begins Touches
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	
+	UITouch *touch = [[event allTouches] anyObject];
+	if  ([[event allTouches] count]==1){
+		isErasing=false;
+	}
+	if ([[event allTouches] count]==2) {
+		isErasing=true;
+	}
 	if (isErasing){
 		myColor=[UIColor blackColor];
 	}
 	else {
 		myColor=[UIColor blueColor];
 	}
-	
-	UITouch *touch = [[event allTouches] anyObject];
 	//Stores current location of touch in our instance variable lastLocation
 	lastLocation = [touch locationInView:self];
 	//Creates an Array and adds it into our initial Array, then adds a color to it
@@ -114,7 +120,7 @@
 	[[[myArray lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.x]];
 	[[[myArray lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.y]];
 	[self setNeedsDisplay];// and displays 
-	isErasing= !isErasing;
+	//isErasing= !isErasing;
 
 }
 
