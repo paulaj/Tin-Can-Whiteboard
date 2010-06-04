@@ -142,7 +142,7 @@
 			[[stroke lastObject] addObject:[NSNumber numberWithFloat: location.y]];	
 			[strokes replaceObjectAtIndex:index withObject:stroke];
 			CFDictionaryReplaceValue (activeStrokes, currentTouch, stroke);
-			NSLog(@"current strokes= %@", activeStrokes );
+			
 		}
 	  }
 	[self setNeedsDisplay];
