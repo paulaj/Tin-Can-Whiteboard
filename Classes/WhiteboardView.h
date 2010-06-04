@@ -12,7 +12,7 @@
 @interface WhiteboardView : UIView {
 	CGPoint lastLocation;
 	CGPoint location;
-	NSMutableArray *myArray;
+	NSMutableArray *strokes;
 	Boolean isErasing;
 	UIColor *myColor;
 	CGFloat myDistance;
