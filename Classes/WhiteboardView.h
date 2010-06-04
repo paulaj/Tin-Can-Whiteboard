@@ -16,6 +16,8 @@
 	Boolean isErasing;
 	UIColor *myColor;
 	CGFloat myDistance;
+	CGFloat mySize;
+	CFMutableDictionaryRef activeStrokes;
 }
 
 //@property (nonatomic, assign) CGPoint lastLocation;
