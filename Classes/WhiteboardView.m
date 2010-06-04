@@ -17,7 +17,7 @@
         lastLocation =CGPointMake(0.0, 0.0);
 		location =CGPointMake(0.0, 0.0);
 		strokes = [[NSMutableArray array] retain];
-		isErasing=true;
+		isErasing=false;
 		myColor= [UIColor blueColor];
 		myDistance=0.0;
 		mySize=0.0;
@@ -73,52 +73,65 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	
 	
-//	UITouch *touch = [[event allTouches] anyObject];
-//	CGPoint point1=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
-//	CGPoint point2=[[[[event allTouches] allObjects] objectAtIndex:1] locationInView:self];
-//	myDistance = sqrt(pow(((point2.x) - (point1.x)), 2) + pow(((point2.y) - (point1.y)), 2));
-	
-	
-	//if ([[event allTouches] count] > 0) {
-//		if (([[event allTouches] count]==2)&(myDistance<=200)){				
-//			isErasing=true;
-//			lastLocation= CGPointMake((((point2.x) + (point1.x))/2.0), (((point2.y) + (point1.y))/2.0));
-//			myColor=[UIColor blackColor];
-//			mySize= myDistance;
-//		} 
-	//else{
-	
-	
-	for (UITouch *touch in [event allTouches]) {
-		NSLog(@"Touch");
-		lastLocation = [touch locationInView:self];
-		//Make a new Stroke
-		NSMutableArray *newStroke = [[NSMutableArray alloc] initWithCapacity:3];
-		[newStroke addObject: [UIColor blueColor]];
-		[newStroke addObject: [NSNumber numberWithFloat: 9]];
-		[newStroke addObject: [NSMutableArray array]];
-		
-		[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.x]];
-		[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.y]];
-
-		CFDictionarySetValue(activeStrokes, touch, newStroke);
-		[strokes addObject: newStroke];
+	if ([[event allTouches] count] > 0) {
+		//UITouch *touch = [[event allTouches] anyObject];
+				if ([[event allTouches] count]==2){
+			CGPoint point1=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
+			CGPoint point2=[[[[event allTouches] allObjects] objectAtIndex:1] locationInView:self];
+			myDistance = sqrt(pow(((point2.x) - (point1.x)), 2) + pow(((point2.y) - (point1.y)), 2));
 		}	
+		if (myDistance<=200 & [[event allTouches] count]==2){
+				isErasing=true;
+				CGPoint point1=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
+				CGPoint point2=[[[[event allTouches] allObjects] objectAtIndex:1] locationInView:self];
+				lastLocation= CGPointMake((((point2.x) + (point1.x))/2.0), (((point2.y) + (point1.y))/2.0));
+				//myColor=[UIColor blackColor];
+				mySize= myDistance;
+				NSMutableArray *newStroke = [[NSMutableArray alloc] initWithCapacity:3];
+				
+				[newStroke addObject: [UIColor blackColor]];
+				[newStroke addObject: [NSNumber numberWithFloat: mySize]];
+				[newStroke addObject: [NSMutableArray array]];
+			
+				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.x]];
+				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.y]];
+				[strokes addObject: newStroke];
+		}
+		else{
+			for (UITouch *touch in [event allTouches]) {
+				isErasing=false;
+				mySize=3;
+				NSLog(@"Touch");
+				lastLocation = [touch locationInView:self];
+				//Make a new Stroke
+				NSMutableArray *newStroke = [[NSMutableArray alloc] initWithCapacity:3];
 
-	}
+				[newStroke addObject: [UIColor blueColor]];
+				[newStroke addObject: [NSNumber numberWithFloat: mySize]];
+				[newStroke addObject: [NSMutableArray array]];
+		
+				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.x]];
+				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.y]];
 
+				CFDictionarySetValue(activeStrokes, touch, newStroke);
+				[strokes addObject: newStroke];
+			}		
 
+		}
+	}	
+
+}
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
 	//UITouch *touch = [[event allTouches] anyObject];
 	NSLog(@"Drag");
-	//Stores every recorded movement CGPoint in the instance variable location
-	//location = [touch locationInView:self];
-	//if (isErasing){	
-//		CGPoint point1=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
-//		CGPoint point2=[[[[event allTouches] allObjects] objectAtIndex:1] locationInView:self];
-//		location= CGPointMake((((point2.x) + (point1.x))/2.0), (((point2.y) + (point1.y))/2.0));
-//	}
-	//else{
+	if (isErasing){	
+		CGPoint point1=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
+		CGPoint point2=[[[[event allTouches] allObjects] objectAtIndex:1] locationInView:self];
+		location= CGPointMake((((point2.x) + (point1.x))/2.0), (((point2.y) + (point1.y))/2.0));
+		[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.x]];
+		[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.y]];
+	}
+	if (isErasing==false){
 		
 		for (int i =0; i < [[event allTouches] count]; i++) {
 			UITouch *currentTouch = [[[event allTouches] allObjects] objectAtIndex:i];
@@ -131,12 +144,14 @@
 			CFDictionaryReplaceValue (activeStrokes, currentTouch, stroke);
 			NSLog(@"current strokes= %@", activeStrokes );
 		}
-		[self setNeedsDisplay];
+	  }
+	[self setNeedsDisplay];
 }
 
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
 	//UITouch *touch = [[event allTouches] anyObject];
+	if (isErasing==false){
 	for (int i =0; i < [[event allTouches] count]; i++) {
 		NSLog(@"End");
 		UITouch *currentTouch = [[[event allTouches] allObjects] objectAtIndex:i];
@@ -147,6 +162,14 @@
 		[[stroke lastObject] addObject:[NSNumber numberWithFloat: location.y]];	
 		[strokes replaceObjectAtIndex:index withObject:stroke];
 		CFDictionaryRemoveValue (activeStrokes, currentTouch);		
+	}
+	}
+	if(isErasing){
+		CGPoint point1=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
+		CGPoint point2=[[[[event allTouches] allObjects] objectAtIndex:1] locationInView:self];
+		location= CGPointMake((((point2.x) + (point1.x))/2.0), (((point2.y) + (point1.y))/2.0));
+		[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.x]];
+		[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.y]];
 	}
 	[self setNeedsDisplay]; 
 	
