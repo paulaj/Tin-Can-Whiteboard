@@ -4,7 +4,7 @@
 //
 //  Created by Paula Jacobs on 6/1/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
-//strokes
+//
 
 #import "WhiteboardView.h"
 #import <math.h>
