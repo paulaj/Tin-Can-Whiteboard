@@ -20,7 +20,7 @@
 		isErasing=false;
 		myColor= [UIColor blueColor];
 		myDistance=0.0;
-		mySize=0.0;
+		mySize=0;
 		activeStrokes =CFDictionaryCreateMutable(NULL,0,NULL,NULL);
 		
     }
@@ -69,9 +69,16 @@
 		}
 	}
 
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+-(NSMutableArray *)makeNewStrokeWithColor:(UIColor *)color withWidth:(NSInteger *)width{
+	NSMutableArray *newStroke = [[NSMutableArray alloc] initWithCapacity:3];
 	
+	[newStroke addObject: color];
+	[newStroke addObject: [NSNumber numberWithInteger:width]];
+	[newStroke addObject: [NSMutableArray array]];
+	return newStroke;
+}
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	NSLog(@"touches began");
 	
 	if ([[event allTouches] count] > 0) {
 		//UITouch *touch = [[event allTouches] anyObject];
@@ -87,11 +94,7 @@
 				lastLocation= CGPointMake((((point2.x) + (point1.x))/2.0), (((point2.y) + (point1.y))/2.0));
 				//myColor=[UIColor blackColor];
 				mySize= myDistance;
-				NSMutableArray *newStroke = [[NSMutableArray alloc] initWithCapacity:3];
-				
-				[newStroke addObject: [UIColor blackColor]];
-				[newStroke addObject: [NSNumber numberWithFloat: mySize]];
-				[newStroke addObject: [NSMutableArray array]];
+				NSMutableArray *newStroke = [self makeNewStrokeWithColor:[UIColor blackColor] withWidth:mySize];
 			
 				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.x]];
 				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.y]];
@@ -101,14 +104,9 @@
 			for (UITouch *touch in [event allTouches]) {
 				isErasing=false;
 				mySize=3;
-				NSLog(@"Touch");
 				lastLocation = [touch locationInView:self];
 				//Make a new Stroke
-				NSMutableArray *newStroke = [[NSMutableArray alloc] initWithCapacity:3];
-
-				[newStroke addObject: [UIColor blueColor]];
-				[newStroke addObject: [NSNumber numberWithFloat: mySize]];
-				[newStroke addObject: [NSMutableArray array]];
+				NSMutableArray *newStroke = [self makeNewStrokeWithColor:[UIColor blueColor] withWidth:mySize];
 		
 				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.x]];
 				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.y]];
@@ -121,6 +119,8 @@
 	}	
 
 }
+
+	
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
 	//UITouch *touch = [[event allTouches] anyObject];
 	NSLog(@"Drag");
@@ -134,15 +134,31 @@
 	if (isErasing==false){
 		
 		for (int i =0; i < [[event allTouches] count]; i++) {
+			NSLog(@"index: %d", i);
+			
 			UITouch *currentTouch = [[[event allTouches] allObjects] objectAtIndex:i];
 			location = [currentTouch locationInView:self];
 			NSMutableArray *stroke= (NSMutableArray *)CFDictionaryGetValue (activeStrokes, currentTouch);
-			NSUInteger index= [strokes indexOfObject:stroke]; 
-			[[stroke lastObject] addObject:[NSNumber numberWithFloat: location.x]];
-			[[stroke lastObject] addObject:[NSNumber numberWithFloat: location.y]];	
-			[strokes replaceObjectAtIndex:index withObject:stroke];
-			CFDictionaryReplaceValue (activeStrokes, currentTouch, stroke);
-			
+			if (stroke == NULL) {
+				NSLog(@"found new finger, making new stroke");
+				NSMutableArray *newStroke = [self makeNewStrokeWithColor:[UIColor blueColor] withWidth:3];
+				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: location.x]];
+				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: location.y]];
+				
+				CFDictionarySetValue(activeStrokes, currentTouch, newStroke);
+				[strokes addObject: newStroke];
+			}
+			else if (![[event allTouches] containsObject:currentTouch]) {
+				CFDictionaryRemoveValue (activeStrokes, currentTouch);
+			}
+			else{
+				NSUInteger index= [strokes indexOfObject:stroke]; 
+				NSLog(@"existing stroke index: %d", index);
+				[[stroke lastObject] addObject:[NSNumber numberWithFloat: location.x]];
+				[[stroke lastObject] addObject:[NSNumber numberWithFloat: location.y]];	
+				[strokes replaceObjectAtIndex:index withObject:stroke];
+				CFDictionaryReplaceValue (activeStrokes, currentTouch, stroke);
+			}
 		}
 	  }
 	[self setNeedsDisplay];

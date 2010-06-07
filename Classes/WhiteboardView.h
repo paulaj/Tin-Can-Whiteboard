@@ -16,10 +16,11 @@
 	Boolean isErasing;
 	UIColor *myColor;
 	CGFloat myDistance;
-	CGFloat mySize;
+	NSInteger mySize;
 	CFMutableDictionaryRef activeStrokes;
 }
 
 //@property (nonatomic, assign) CGPoint lastLocation;
+-(NSMutableArray *)makeNewStrokeWithColor:(UIColor *)color withLineWidth:(NSInteger)width;
 
 @end
