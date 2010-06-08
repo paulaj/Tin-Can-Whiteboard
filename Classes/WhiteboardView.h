@@ -18,6 +18,7 @@
 	CGFloat myDistance;
 	NSInteger mySize;
 	CFMutableDictionaryRef activeStrokes;
+	UIView *button;
 }
 
 //@property (nonatomic, assign) CGPoint lastLocation;

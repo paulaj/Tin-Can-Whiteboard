@@ -8,6 +8,7 @@
 
 #import "WhiteboardView.h"
 #import <math.h>
+#import "Button.h"
 
 @implementation WhiteboardView
 //@synthesize lastLocation;
@@ -23,9 +24,13 @@
 		mySize=0;
 		activeStrokes =CFDictionaryCreateMutable(NULL,0,NULL,NULL);
 		
+		
+		button=[[[Button alloc] initWithFrame: CGRectMake(600, 800, 100, 100)] retain];
+		[self addSubview:button];
     }
     return self;
 }
+
 
 - (void)drawRect:(CGRect)rect {
     // Drawing code
@@ -78,7 +83,7 @@
 	return newStroke;
 }
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	NSLog(@"touches began");
+	//NSLog(@"touches began");
 	
 	if ([[event allTouches] count] > 0) {
 		//UITouch *touch = [[event allTouches] anyObject];
@@ -143,11 +148,11 @@
 			UITouch *currentTouch = [[[event allTouches] allObjects] objectAtIndex:i];
 			location = [currentTouch locationInView:self];
 			
-			NSLog(@"index: %d at loc %f,%f with phase: %d", i, location.x, location.y, currentTouch.phase);
+			//NSLog(@"index: %d at loc %f,%f with phase: %d", i, location.x, location.y, currentTouch.phase);
 
 			NSMutableArray *stroke= (NSMutableArray *)CFDictionaryGetValue (activeStrokes, currentTouch);
 			if (stroke == NULL) {
-				NSLog(@"found new finger, making new stroke");
+				//NSLog(@"found new finger, making new stroke");
 				NSMutableArray *newStroke = [self makeNewStrokeWithColor:[UIColor blueColor] withWidth:3];
 				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: location.x]];
 				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: location.y]];
@@ -177,7 +182,7 @@
 	//UITouch *touch = [[event allTouches] anyObject];
 	if (isErasing==false){
 	for (int i =0; i < [[event allTouches] count]; i++) {
-		NSLog(@"End");
+		//NSLog(@"End");
 		UITouch *currentTouch = [[[event allTouches] allObjects] objectAtIndex:i];
 		location = [currentTouch locationInView:self];
 		NSMutableArray *stroke= (NSMutableArray *)CFDictionaryGetValue (activeStrokes, currentTouch);
