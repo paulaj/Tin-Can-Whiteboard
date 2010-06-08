@@ -7,18 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Button.h"
 
 
 @interface WhiteboardView : UIView {
 	CGPoint lastLocation;
 	CGPoint location;
 	NSMutableArray *strokes;
-	Boolean isErasing;
+	
 	UIColor *myColor;
 	CGFloat myDistance;
 	NSInteger mySize;
 	CFMutableDictionaryRef activeStrokes;
-	UIView *button;
+	Button *button;
 }
 
 //@property (nonatomic, assign) CGPoint lastLocation;

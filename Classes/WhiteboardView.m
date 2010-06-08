@@ -18,7 +18,7 @@
         lastLocation =CGPointMake(0.0, 0.0);
 		location =CGPointMake(0.0, 0.0);
 		strokes = [[NSMutableArray array] retain];
-		isErasing=false;
+		
 		myColor= [UIColor blueColor];
 		myDistance=0.0;
 		mySize=0;
@@ -86,19 +86,9 @@
 	//NSLog(@"touches began");
 	
 	if ([[event allTouches] count] > 0) {
-		//UITouch *touch = [[event allTouches] anyObject];
-				if ([[event allTouches] count]==2){
-			CGPoint point1=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
-			CGPoint point2=[[[[event allTouches] allObjects] objectAtIndex:1] locationInView:self];
-			myDistance = sqrt(pow(((point2.x) - (point1.x)), 2) + pow(((point2.y) - (point1.y)), 2));
-		}	
-		if (myDistance<=200 & [[event allTouches] count]==2){
-				isErasing=true;
-				CGPoint point1=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
-				CGPoint point2=[[[[event allTouches] allObjects] objectAtIndex:1] locationInView:self];
-				lastLocation= CGPointMake((((point2.x) + (point1.x))/2.0), (((point2.y) + (point1.y))/2.0));
-				//myColor=[UIColor blackColor];
-				mySize= myDistance;
+		if (button.isErasing==true ){
+				lastLocation=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
+				mySize=10;
 				NSMutableArray *newStroke = [self makeNewStrokeWithColor:[UIColor blackColor] withWidth:mySize];
 			
 				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.x]];
@@ -107,7 +97,7 @@
 		}
 		else{
 			for (UITouch *touch in [event allTouches]) {
-				isErasing=false;
+				
 				mySize=3;
 				lastLocation = [touch locationInView:self];
 				//Make a new Stroke
@@ -129,19 +119,13 @@
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
 	//UITouch *touch = [[event allTouches] anyObject];
 	//NSLog(@"Drag");
-	if (isErasing){	
-		if (myDistance<=200 & [[event allTouches] count]==2){
-		CGPoint point1=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
-		CGPoint point2=[[[[event allTouches] allObjects] objectAtIndex:1] locationInView:self];
-		location= CGPointMake((((point2.x) + (point1.x))/2.0), (((point2.y) + (point1.y))/2.0));
+	if (button.isErasing){	
+		location=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
+		//CGPoint point2=[[[[event allTouches] allObjects] objectAtIndex:1] locationInView:self];
 		[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.x]];
 		[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.y]];
-		}
-		else{
-			isErasing=false;
-		}
 	}
-	if (isErasing==false){
+	else{
 		
 		for (int i =0; i < [[event allTouches] count]; i++) {
 			
@@ -172,7 +156,8 @@
 				CFDictionaryReplaceValue (activeStrokes, currentTouch, stroke); 
 			}
 		}
-	  }
+	  
+	}	
 	//NSLog(@"active strokes:%@",activeStrokes);
 	[self setNeedsDisplay];
 }
@@ -180,7 +165,8 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
 	//UITouch *touch = [[event allTouches] anyObject];
-	if (isErasing==false){
+	
+	if (button.isErasing==false){
 	for (int i =0; i < [[event allTouches] count]; i++) {
 		//NSLog(@"End");
 		UITouch *currentTouch = [[[event allTouches] allObjects] objectAtIndex:i];
@@ -193,12 +179,11 @@
 		CFDictionaryRemoveValue (activeStrokes, currentTouch);		
 	}
 	}
-	if(isErasing){
-		//CGPoint point1=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
-		//CGPoint point2=[[[[event allTouches] allObjects] objectAtIndex:1] locationInView:self];
-		//location= CGPointMake((((point2.x) + (point1.x))/2.0), (((point2.y) + (point1.y))/2.0));
-		//[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.x]];
-		//[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.y]];
+	if(button.isErasing){
+		location=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
+
+		[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.x]];
+		[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.y]];
 	}
 	[self setNeedsDisplay]; 
 	
