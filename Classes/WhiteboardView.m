@@ -123,21 +123,28 @@
 	
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
 	//UITouch *touch = [[event allTouches] anyObject];
-	NSLog(@"Drag");
+	//NSLog(@"Drag");
 	if (isErasing){	
+		if (myDistance<=200 & [[event allTouches] count]==2){
 		CGPoint point1=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
 		CGPoint point2=[[[[event allTouches] allObjects] objectAtIndex:1] locationInView:self];
 		location= CGPointMake((((point2.x) + (point1.x))/2.0), (((point2.y) + (point1.y))/2.0));
 		[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.x]];
 		[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.y]];
+		}
+		else{
+			isErasing=false;
+		}
 	}
 	if (isErasing==false){
 		
 		for (int i =0; i < [[event allTouches] count]; i++) {
-			NSLog(@"index: %d", i);
 			
 			UITouch *currentTouch = [[[event allTouches] allObjects] objectAtIndex:i];
 			location = [currentTouch locationInView:self];
+			
+			NSLog(@"index: %d at loc %f,%f with phase: %d", i, location.x, location.y, currentTouch.phase);
+
 			NSMutableArray *stroke= (NSMutableArray *)CFDictionaryGetValue (activeStrokes, currentTouch);
 			if (stroke == NULL) {
 				NSLog(@"found new finger, making new stroke");
@@ -153,14 +160,15 @@
 			}
 			else{
 				NSUInteger index= [strokes indexOfObject:stroke]; 
-				NSLog(@"existing stroke index: %d", index);
+				//NSLog(@"existing stroke index: %d", index);
 				[[stroke lastObject] addObject:[NSNumber numberWithFloat: location.x]];
 				[[stroke lastObject] addObject:[NSNumber numberWithFloat: location.y]];	
 				[strokes replaceObjectAtIndex:index withObject:stroke];
-				CFDictionaryReplaceValue (activeStrokes, currentTouch, stroke);
+				CFDictionaryReplaceValue (activeStrokes, currentTouch, stroke); 
 			}
 		}
 	  }
+	//NSLog(@"active strokes:%@",activeStrokes);
 	[self setNeedsDisplay];
 }
 
