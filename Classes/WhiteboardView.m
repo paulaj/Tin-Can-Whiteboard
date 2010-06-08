@@ -189,11 +189,11 @@
 	}
 	}
 	if(isErasing){
-		CGPoint point1=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
-		CGPoint point2=[[[[event allTouches] allObjects] objectAtIndex:1] locationInView:self];
-		location= CGPointMake((((point2.x) + (point1.x))/2.0), (((point2.y) + (point1.y))/2.0));
-		[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.x]];
-		[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.y]];
+		//CGPoint point1=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
+		//CGPoint point2=[[[[event allTouches] allObjects] objectAtIndex:1] locationInView:self];
+		//location= CGPointMake((((point2.x) + (point1.x))/2.0), (((point2.y) + (point1.y))/2.0));
+		//[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.x]];
+		//[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.y]];
 	}
 	[self setNeedsDisplay]; 
 	
