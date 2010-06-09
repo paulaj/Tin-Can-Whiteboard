@@ -15,11 +15,14 @@
 
 
 
-- (id)init:(CGRect)frame {
-    if ((self = [super initWithFrame:frame])) {
-        self.backgroundColor =[UIColor whiteColor];
+- (id)initWithImage:(UIImage *)image withFrame:(CGRect)frame{
+    if ((self = [super initWithImage:image])) {
+        //self.backgroundColor =[UIColor whiteColor];
 		[self setNeedsDisplay];
 		self.isErasing=false;
+		self.frame = frame;
+		
+		self.userInteractionEnabled=true;
 		
     }
 	return self;  
@@ -29,14 +32,15 @@
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    //CGContextRef ctx = UIGraphicsGetCurrentContext();
 	if (isErasing==true) {
-		CGContextSetRGBFillColor(ctx, 1.0, 1, 1, 1);
-		CGContextFillRect(ctx, self.bounds);
+		//CGContextSetRGBFillColor(ctx, 1.0, 1, 1, 1);
+		//CGContextFillRect(ctx, self.bounds);
+		//CGContextDrawImage(ctx, sel, <#CGImageRef image#>)
 	}
 	if (isErasing==false) {
-		CGContextSetRGBFillColor(ctx, 1.0, 1, 0, .5);
-	CGContextFillRect(ctx, self.bounds);
+		//CGContextSetRGBFillColor(ctx, 1.0, 1, 0, .5);
+		//CGContextFillRect(ctx, self.bounds);
 	}
 }
 

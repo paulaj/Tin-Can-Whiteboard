@@ -17,6 +17,16 @@
 		28D7ACF80DDB3853001CB0EB /* Tin_Can_WhiteboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* Tin_Can_WhiteboardViewController.m */; };
 		DA24ABD711BEC394001EA3A6 /* Button.m in Sources */ = {isa = PBXBuildFile; fileRef = DA24ABD611BEC394001EA3A6 /* Button.m */; };
 		DA24ACD411BFD7C9001EA3A6 /* EraseAllButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA24ACD311BFD7C9001EA3A6 /* EraseAllButton.m */; };
+		DA24ADB911C006BD001EA3A6 /* pencil_add.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24ADAF11C006BD001EA3A6 /* pencil_add.png */; };
+		DA24ADBA11C006BD001EA3A6 /* paintbrush.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24ADB011C006BD001EA3A6 /* paintbrush.png */; };
+		DA24ADBB11C006BD001EA3A6 /* color_swatch.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24ADB111C006BD001EA3A6 /* color_swatch.png */; };
+		DA24ADBC11C006BD001EA3A6 /* palette.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24ADB211C006BD001EA3A6 /* palette.png */; };
+		DA24ADBD11C006BD001EA3A6 /* wrench.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24ADB311C006BD001EA3A6 /* wrench.png */; };
+		DA24ADBE11C006BD001EA3A6 /* page_white_paintbrush.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24ADB411C006BD001EA3A6 /* page_white_paintbrush.png */; };
+		DA24ADBF11C006BD001EA3A6 /* pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24ADB511C006BD001EA3A6 /* pencil.png */; };
+		DA24ADC011C006BD001EA3A6 /* page_white_paint.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24ADB611C006BD001EA3A6 /* page_white_paint.png */; };
+		DA24ADC111C006BD001EA3A6 /* pencil_delete.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24ADB711C006BD001EA3A6 /* pencil_delete.png */; };
+		DA24ADC211C006BD001EA3A6 /* arrow_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24ADB811C006BD001EA3A6 /* arrow_refresh.png */; };
 		DAFEB76D11B570F10050A558 /* WhiteboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEB76C11B570F10050A558 /* WhiteboardView.m */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +48,16 @@
 		DA24ABD611BEC394001EA3A6 /* Button.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Button.m; sourceTree = "<group>"; };
 		DA24ACD211BFD7C9001EA3A6 /* EraseAllButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EraseAllButton.h; sourceTree = "<group>"; };
 		DA24ACD311BFD7C9001EA3A6 /* EraseAllButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EraseAllButton.m; sourceTree = "<group>"; };
+		DA24ADAF11C006BD001EA3A6 /* pencil_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pencil_add.png; path = ../../Desktop/pencil_add.png; sourceTree = SOURCE_ROOT; };
+		DA24ADB011C006BD001EA3A6 /* paintbrush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = paintbrush.png; path = ../../Desktop/paintbrush.png; sourceTree = SOURCE_ROOT; };
+		DA24ADB111C006BD001EA3A6 /* color_swatch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = color_swatch.png; path = ../../Desktop/color_swatch.png; sourceTree = SOURCE_ROOT; };
+		DA24ADB211C006BD001EA3A6 /* palette.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = palette.png; path = ../../Desktop/palette.png; sourceTree = SOURCE_ROOT; };
+		DA24ADB311C006BD001EA3A6 /* wrench.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wrench.png; path = ../../Desktop/wrench.png; sourceTree = SOURCE_ROOT; };
+		DA24ADB411C006BD001EA3A6 /* page_white_paintbrush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = page_white_paintbrush.png; path = ../../Desktop/page_white_paintbrush.png; sourceTree = SOURCE_ROOT; };
+		DA24ADB511C006BD001EA3A6 /* pencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pencil.png; path = ../../Desktop/pencil.png; sourceTree = SOURCE_ROOT; };
+		DA24ADB611C006BD001EA3A6 /* page_white_paint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = page_white_paint.png; path = ../../Desktop/page_white_paint.png; sourceTree = SOURCE_ROOT; };
+		DA24ADB711C006BD001EA3A6 /* pencil_delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pencil_delete.png; path = ../../Desktop/pencil_delete.png; sourceTree = SOURCE_ROOT; };
+		DA24ADB811C006BD001EA3A6 /* arrow_refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrow_refresh.png; path = ../../Desktop/arrow_refresh.png; sourceTree = SOURCE_ROOT; };
 		DAFEB76B11B570F10050A558 /* WhiteboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteboardView.h; sourceTree = "<group>"; };
 		DAFEB76C11B570F10050A558 /* WhiteboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteboardView.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 1; };
 /* End PBXFileReference section */
@@ -59,6 +79,16 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				DA24ADAF11C006BD001EA3A6 /* pencil_add.png */,
+				DA24ADB011C006BD001EA3A6 /* paintbrush.png */,
+				DA24ADB111C006BD001EA3A6 /* color_swatch.png */,
+				DA24ADB211C006BD001EA3A6 /* palette.png */,
+				DA24ADB311C006BD001EA3A6 /* wrench.png */,
+				DA24ADB411C006BD001EA3A6 /* page_white_paintbrush.png */,
+				DA24ADB511C006BD001EA3A6 /* pencil.png */,
+				DA24ADB611C006BD001EA3A6 /* page_white_paint.png */,
+				DA24ADB711C006BD001EA3A6 /* pencil_delete.png */,
+				DA24ADB811C006BD001EA3A6 /* arrow_refresh.png */,
 				1D3623240D0F684500981E51 /* Tin_Can_WhiteboardAppDelegate.h */,
 				1D3623250D0F684500981E51 /* Tin_Can_WhiteboardAppDelegate.m */,
 				28D7ACF60DDB3853001CB0EB /* Tin_Can_WhiteboardViewController.h */,
@@ -173,6 +203,16 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				2899E5220DE3E06400AC0155 /* Tin_Can_WhiteboardViewController.xib in Resources */,
+				DA24ADB911C006BD001EA3A6 /* pencil_add.png in Resources */,
+				DA24ADBA11C006BD001EA3A6 /* paintbrush.png in Resources */,
+				DA24ADBB11C006BD001EA3A6 /* color_swatch.png in Resources */,
+				DA24ADBC11C006BD001EA3A6 /* palette.png in Resources */,
+				DA24ADBD11C006BD001EA3A6 /* wrench.png in Resources */,
+				DA24ADBE11C006BD001EA3A6 /* page_white_paintbrush.png in Resources */,
+				DA24ADBF11C006BD001EA3A6 /* pencil.png in Resources */,
+				DA24ADC011C006BD001EA3A6 /* page_white_paint.png in Resources */,
+				DA24ADC111C006BD001EA3A6 /* pencil_delete.png in Resources */,
+				DA24ADC211C006BD001EA3A6 /* arrow_refresh.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

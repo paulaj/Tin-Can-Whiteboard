@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 
 
-@interface Button : UIView {
+@interface Button : UIImageView {
 	bool isErasing;
 	
 
 }
-
+- (id)initWithImage:(UIImage *)image withFrame:(CGRect)frame;
 @property (nonatomic, assign) bool isErasing;
 
 
