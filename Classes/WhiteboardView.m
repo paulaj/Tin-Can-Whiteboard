@@ -14,7 +14,7 @@
 @implementation WhiteboardView
 
 @synthesize strokes;
-
+@synthesize myColor;
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
@@ -27,11 +27,27 @@
 		mySize=0;
 		activeStrokes =CFDictionaryCreateMutable(NULL,0,NULL,NULL);
 		
+		blueButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_blue.png"] withFrame: CGRectMake(100, 50, 50, 50) withColor:[UIColor blueColor]] retain];
+		greenButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_green.png"] withFrame: CGRectMake(200, 50, 50, 50) withColor:[UIColor greenColor]] retain];
+		orangeButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_orange.png"] withFrame: CGRectMake(300, 50, 50, 50) withColor:[UIColor orangeColor]] retain];
+		purpleButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_purple.png"] withFrame: CGRectMake(400, 50, 50, 50) withColor:[UIColor purpleColor]] retain];
+		redButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_red.png"] withFrame: CGRectMake(500, 50, 50, 50) withColor:[UIColor redColor]] retain];
+		whiteButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_white.png"] withFrame: CGRectMake(600, 50, 50, 50) withColor:[UIColor whiteColor]] retain];
+		yellowButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_yellow.png"] withFrame: CGRectMake(0, 50, 50, 50) withColor:[UIColor yellowColor]] retain];
 		
-		button=[[[Button alloc] initWithImage:[UIImage imageNamed:@"page_white_paint.png"] withFrame: CGRectMake(700, 50, 30, 30)] retain];
-		eraseButton=[[[EraseAllButton alloc] initWithImage:[UIImage imageNamed:@"arrow_refresh.png"] withFrame: CGRectMake(650, 50, 30, 30)] retain];
+
+		button=[[[Button alloc] initWithImage:[UIImage imageNamed:@"page_white_paint.png"] withFrame: CGRectMake(725, 60, 30, 30)] retain];
+		eraseButton=[[[EraseAllButton alloc] initWithImage:[UIImage imageNamed:@"arrow_refresh.png"] withFrame: CGRectMake(675, 60, 30, 30)] retain];
+		
 		[self addSubview:button];
 		[self addSubview:eraseButton];
+		[self addSubview:blueButton];
+		[self addSubview:greenButton];
+		[self addSubview:orangeButton];
+		[self addSubview:purpleButton];
+		[self addSubview:redButton];
+		[self addSubview:whiteButton];
+		[self addSubview:yellowButton];
     }
     return self;
 }
@@ -53,13 +69,18 @@
 			for (int c=0; c< [strokes count]; c++) {//as long as we don't go past the number of available objects
 				NSArray *storedInfo=[strokes objectAtIndex:c];//lets name the array at that index 
 				NSArray *storedPoints=[storedInfo objectAtIndex:2];
-				if ([[storedInfo objectAtIndex:0] isEqual:[UIColor blueColor]]) {
-					CGContextSetRGBStrokeColor(ctx, 0, 0, 1.0, 1);
-					CGContextSetLineWidth(ctx, [[storedInfo objectAtIndex:1]floatValue]);
-				}
+				
 				if ([[storedInfo objectAtIndex:0]isEqual:[UIColor blackColor]]) {
 					CGContextSetRGBStrokeColor(ctx, 0, 0, 0, 1);
 					CGContextSetLineWidth(ctx, [[storedInfo objectAtIndex:1]floatValue] );
+				}
+				else{
+					
+					//NSLog(@"Color %@:", myColor);
+					UIColor *currentStrokeColor =[storedInfo objectAtIndex:0];
+					CGContextSetStrokeColorWithColor(ctx, currentStrokeColor.CGColor);
+					//CGContextSetRGBStrokeColor(ctx, 1, 0, 0, 1);
+					CGContextSetLineWidth(ctx, [[storedInfo objectAtIndex:1]floatValue]);
 				}
 				if ([storedPoints count] >2) { //if we have at least one full x,y pair
 					//store them as a float in a variable so we can use them
@@ -97,7 +118,11 @@
 		[self setNeedsDisplay];
 }
 	
-	
+-(void)changeColorWithColor:(UIColor *)color{
+	myColor = color; 
+	NSLog(@" setting color to %@:", myColor);
+	[self setNeedsDisplay];
+}	
 	
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	//NSLog(@"touches began");
@@ -118,7 +143,7 @@
 				mySize=3;
 				lastLocation = [touch locationInView:self];
 				//Make a new Stroke
-				NSMutableArray *newStroke = [self makeNewStrokeWithColor:[UIColor blueColor] withWidth:mySize];
+				NSMutableArray *newStroke = [self makeNewStrokeWithColor:myColor withWidth:mySize];
 		
 				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.x]];
 				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.y]];
@@ -135,7 +160,8 @@
 	
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
 	//UITouch *touch = [[event allTouches] anyObject];
-	//NSLog(@"Drag");
+	//NSLog(@"Color %@:", myColor);
+	
 	if (button.isErasing){	
 		location=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
 		//CGPoint point2=[[[[event allTouches] allObjects] objectAtIndex:1] locationInView:self];

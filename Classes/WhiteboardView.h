@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Button.h"
 #import "EraseAllButton.h"
+#import "ColorButton.h"
 
 @class EraseAllButton;
+@class ColorButton;
 
 @interface WhiteboardView : UIView {
 	CGPoint lastLocation;
@@ -23,9 +25,20 @@
 	CFMutableDictionaryRef activeStrokes;
 	Button *button;
 	EraseAllButton *eraseButton;
+	ColorButton *blueButton;
+	ColorButton *greenButton;
+	ColorButton *orangeButton;
+	ColorButton *purpleButton;
+	ColorButton *redButton;
+	ColorButton *whiteButton;
+	ColorButton *yellowButton;
+	
 }
 - (void)eraseAll;
+-(void)changeColorWithColor:(UIColor *)color;
+
 @property (nonatomic, retain) NSMutableArray *strokes;
+@property (nonatomic, retain) UIColor *myColor;
 
 
 @end
