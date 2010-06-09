@@ -28,8 +28,8 @@
 		activeStrokes =CFDictionaryCreateMutable(NULL,0,NULL,NULL);
 		
 		
-		button=[[[Button alloc] initWithFrame: CGRectMake(600, 800, 100, 100)] retain];
-		eraseButton=[[[EraseAllButton alloc] initWithFrame: CGRectMake(100, 800, 100, 100)] retain];
+		button=[[[Button alloc] initWithFrame: CGRectMake(600, 800, 50, 50)] retain];
+		eraseButton=[[[EraseAllButton alloc] initWithFrame: CGRectMake(100, 800, 50, 50)] retain];
 		[self addSubview:button];
 		[self addSubview:eraseButton];
     }
@@ -105,7 +105,7 @@
 	if ([[event allTouches] count] > 0) {
 		if (button.isErasing==true ){
 				lastLocation=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
-				mySize=10;
+				mySize=20;
 				NSMutableArray *newStroke = [self makeNewStrokeWithColor:[UIColor blackColor] withWidth:mySize];
 			
 				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.x]];

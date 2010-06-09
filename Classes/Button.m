@@ -35,7 +35,7 @@
 		CGContextFillRect(ctx, self.bounds);
 	}
 	if (isErasing==false) {
-		CGContextSetRGBFillColor(ctx, 1.0, 1, 1, .5);
+		CGContextSetRGBFillColor(ctx, 1.0, 1, 0, .5);
 	CGContextFillRect(ctx, self.bounds);
 	}
 }
@@ -44,7 +44,8 @@
 	NSLog(@"touches began");
 		
 }
-
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+}
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
 	isErasing=!isErasing;

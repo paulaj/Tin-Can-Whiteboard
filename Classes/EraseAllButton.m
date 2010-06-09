@@ -38,9 +38,10 @@
 	if (eraser==true) {
 		CGContextSetRGBFillColor(ctx, 1.0, 1, 1, 1);
 		CGContextFillRect(ctx, self.bounds);
+		
 	}
 	if (eraser==false) {
-		CGContextSetRGBFillColor(ctx, 1.0, 1, 1, .5);
+		CGContextSetRGBFillColor(ctx, 0, 0, 1, .5);
 		CGContextFillRect(ctx, self.bounds);
 	}	
 }
@@ -51,7 +52,9 @@
 	[self setNeedsDisplay];
 	
 }
-
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+	
+}
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
 	eraser =false;
