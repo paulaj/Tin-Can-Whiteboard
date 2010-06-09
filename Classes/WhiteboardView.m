@@ -9,9 +9,12 @@
 #import "WhiteboardView.h"
 #import <math.h>
 #import "Button.h"
+#import "EraseAllButton.h"
 
 @implementation WhiteboardView
-//@synthesize lastLocation;
+
+@synthesize strokes;
+
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
@@ -26,7 +29,9 @@
 		
 		
 		button=[[[Button alloc] initWithFrame: CGRectMake(600, 800, 100, 100)] retain];
+		eraseButton=[[[EraseAllButton alloc] initWithFrame: CGRectMake(100, 800, 100, 100)] retain];
 		[self addSubview:button];
+		[self addSubview:eraseButton];
     }
     return self;
 }
@@ -42,6 +47,7 @@
 		CGContextFillRect(ctx, CGRectMake(0, 0, 768, 1024));
 		
 		}
+			
 		if ([strokes count] >0) { //under the condition that there is something in our Array
 			
 			for (int c=0; c< [strokes count]; c++) {//as long as we don't go past the number of available objects
@@ -68,12 +74,14 @@
 						storedY=[[storedPoints objectAtIndex:i+1] floatValue];
 						CGContextAddLineToPoint (ctx, storedX, storedY);//lets create a line between them, then move to the end of that line		 
 					}
+					
 					CGContextStrokePath(ctx);			 
 				}
 			}
 		}
 	}
 
+ 
 -(NSMutableArray *)makeNewStrokeWithColor:(UIColor *)color withWidth:(NSInteger *)width{
 	NSMutableArray *newStroke = [[NSMutableArray alloc] initWithCapacity:3];
 	
@@ -82,6 +90,15 @@
 	[newStroke addObject: [NSMutableArray array]];
 	return newStroke;
 }
+
+
+-(void)eraseAll{
+		[strokes removeAllObjects]; 
+		[self setNeedsDisplay];
+}
+	
+	
+	
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	//NSLog(@"touches began");
 	

@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Button.h"
+#import "EraseAllButton.h"
 
+@class EraseAllButton;
 
 @interface WhiteboardView : UIView {
 	CGPoint lastLocation;
@@ -20,9 +22,10 @@
 	NSInteger mySize;
 	CFMutableDictionaryRef activeStrokes;
 	Button *button;
+	EraseAllButton *eraseButton;
 }
+- (void)eraseAll;
+@property (nonatomic, retain) NSMutableArray *strokes;
 
-//@property (nonatomic, assign) CGPoint lastLocation;
--(NSMutableArray *)makeNewStrokeWithColor:(UIColor *)color withLineWidth:(NSInteger)width;
 
 @end
