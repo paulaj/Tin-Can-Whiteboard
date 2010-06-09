@@ -17,11 +17,15 @@
 //@synthesize eraseAll;
 @synthesize eraser;
 
-- (id)init:(CGRect)frame {
-    if ((self = [super initWithFrame:frame])) {
-		self.backgroundColor =[UIColor whiteColor];
+- (id)initWithImage:(UIImage *)image withFrame:(CGRect)frame{
+    if ((self = [super initWithImage:image])) {
+        //self.backgroundColor =[UIColor whiteColor];
 		[self setNeedsDisplay];
-        self.eraser=false;
+		self.eraser=false;
+		self.frame = frame;
+		
+		self.userInteractionEnabled=true;
+		
     }
     return self;
 }

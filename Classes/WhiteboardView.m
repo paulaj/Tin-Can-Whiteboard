@@ -28,8 +28,8 @@
 		activeStrokes =CFDictionaryCreateMutable(NULL,0,NULL,NULL);
 		
 		
-		button=[[[Button alloc] initWithImage:[UIImage imageNamed:@"page_white_paint.png"] withFrame: CGRectMake(600, 800, 50, 50)] retain];
-		eraseButton=[[[EraseAllButton alloc] initWithFrame: CGRectMake(100, 800, 50, 50)] retain];
+		button=[[[Button alloc] initWithImage:[UIImage imageNamed:@"page_white_paint.png"] withFrame: CGRectMake(700, 50, 30, 30)] retain];
+		eraseButton=[[[EraseAllButton alloc] initWithImage:[UIImage imageNamed:@"arrow_refresh.png"] withFrame: CGRectMake(650, 50, 30, 30)] retain];
 		[self addSubview:button];
 		[self addSubview:eraseButton];
     }

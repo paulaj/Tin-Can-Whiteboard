@@ -11,9 +11,10 @@
 
 
 
-@interface EraseAllButton : UIView {
+@interface EraseAllButton : UIImageView {
 	bool eraser;
 }
+- (id)initWithImage:(UIImage *)image withFrame:(CGRect)frame;
 @property (nonatomic, assign) bool eraser;
 
 @end
