@@ -36,9 +36,9 @@
 		
 
 		eraserButton=[[[EraserButton alloc] initWithImage:[UIImage imageNamed:@"tab.png"] withFrame: CGRectMake(100, 60, 30, 30)] retain];
-		eraseAllButton=[[[EraseAllButton alloc] initWithImage:[UIImage imageNamed:@"arrow_refresh.png"] withFrame: CGRectMake(250, 60, 30, 30)] retain];
-		plusButton=[[[SizeButton alloc] initWithImage:[UIImage imageNamed:@"add.png"] withFrame: CGRectMake(400, 60, 30, 30) withDirection: @"+"] retain];
-		minusButton=[[[SizeButton alloc] initWithImage:[UIImage imageNamed:@"delete.png"] withFrame: CGRectMake(550, 60, 30, 30) withDirection:@"-"] retain];
+		eraseAllButton=[[[EraseAllButton alloc] initWithImage:[UIImage imageNamed:@"arrow_refresh.png"] withFrame: CGRectMake(200, 60, 30, 30)] retain];
+		plusButton=[[[SizeButton alloc] initWithImage:[UIImage imageNamed:@"add.png"] withFrame: CGRectMake(300, 60, 30, 30) withDirectionOfChange: @"+"] retain];
+		minusButton=[[[SizeButton alloc] initWithImage:[UIImage imageNamed:@"delete.png"] withFrame: CGRectMake(500, 60, 30, 30) withDirectionOfChange:@"-"] retain];
 		[self addSubview:eraserButton];
 		[self addSubview:eraseAllButton];
 		[self addSubview:blueButton];
@@ -65,7 +65,9 @@
 		CGContextFillRect(ctx, CGRectMake(0, 0, 768, 1024));
 		
 		}
-			
+		CGContextSetFillColorWithColor(ctx, currentStrokeColor.CGColor);
+		CGContextAddEllipseInRect(ctx, CGRectMake(	400, 60, currentStrokeWidth, currentStrokeWidth));
+		CGContextFillPath(ctx);	
 		if ([strokes count] >0) { //under the condition that there is something in our Array
 			
 			for (int c=0; c< [strokes count]; c++) {//as long as we don't go past the number of available objects
@@ -79,8 +81,8 @@
 				else{
 					
 					//NSLog(@"Color %@:", currentStrokeColor);
-					UIColor *currentStrokeColor =[storedInfo objectAtIndex:0];
-					CGContextSetStrokeColorWithColor(ctx, currentStrokeColor.CGColor);
+					UIColor *strokeColor =[storedInfo objectAtIndex:0];
+					CGContextSetStrokeColorWithColor(ctx, strokeColor.CGColor);
 					//CGContextSetRGBStrokeColor(ctx, 1, 0, 0, 1);
 					CGContextSetLineWidth(ctx, [[storedInfo objectAtIndex:1]floatValue]);
 					NSLog(@" StrokeSize %@:", [storedInfo objectAtIndex:1]);
@@ -137,8 +139,8 @@
 
 
 
--(void)changeStrokeWidthWithDirection:(NSString *) direction{
-	if (direction==@"+"){
+-(void)changeStrokeWidthWithDirection:(NSString *) directionOfChange{
+	if (directionOfChange==@"+"){
 		currentStrokeWidth=currentStrokeWidth+1; 
 		NSLog(@" changing size up to %d:", currentStrokeWidth);
 		
