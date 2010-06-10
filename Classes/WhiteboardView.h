@@ -43,6 +43,7 @@
 -(void)changeColorWithColor:(UIColor *)color;
 -(void)notErasingAnymore;
 -(void)changeStrokeWidthWithDirection:(NSString *) direction;
+-(void)changeButtonLocatorLocationWithFrame:(CGRect) frame;
 @property (nonatomic, retain) NSMutableArray *strokes;
 @property (nonatomic, retain) UIColor *currentStrokeColor;
 

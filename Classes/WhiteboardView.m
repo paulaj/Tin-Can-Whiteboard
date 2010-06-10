@@ -85,7 +85,7 @@
 					CGContextSetStrokeColorWithColor(ctx, strokeColor.CGColor);
 					//CGContextSetRGBStrokeColor(ctx, 1, 0, 0, 1);
 					CGContextSetLineWidth(ctx, [[storedInfo objectAtIndex:1]floatValue]);
-					NSLog(@" StrokeSize %@:", [storedInfo objectAtIndex:1]);
+					//NSLog(@" StrokeSize %@:", [storedInfo objectAtIndex:1]);
 				}
 				if ([storedPoints count] >2) { //if we have at least one full x,y pair
 					//store them as a float in a variable so we can use them
@@ -147,17 +147,20 @@
 	[self setNeedsDisplay];
 }	
 
-
+-(void)changeButtonLocatorLocationWithFrame:(CGRect)frame {
+	frameOfButtonLocator = frame; 
+	[self setNeedsDisplay];
+}
 
 -(void)changeStrokeWidthWithDirection:(NSString *) directionOfChange{
 	if ((directionOfChange==@"+") & (currentStrokeWidth<80)){
 		currentStrokeWidth=currentStrokeWidth+1; 
-		NSLog(@" changing size up to %d:", currentStrokeWidth);
+		//NSLog(@" changing size up to %d:", currentStrokeWidth);
 		
 		}
 	else if ((directionOfChange==@"-") & (currentStrokeWidth>1)){
 		currentStrokeWidth=currentStrokeWidth-1; 
-		NSLog(@" changing size down to %d:", currentStrokeWidth);
+		//NSLog(@" changing size down to %d:", currentStrokeWidth);
 		
 	}
 	
