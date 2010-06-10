@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Button.h"
+#import "EraserButton.h"
 #import "EraseAllButton.h"
 #import "ColorButton.h"
 
@@ -23,8 +23,8 @@
 	CGFloat myDistance;
 	NSInteger mySize;
 	CFMutableDictionaryRef activeStrokes;
-	Button *button;
-	EraseAllButton *eraseButton;
+	EraserButton *eraserButton;
+	EraseAllButton *eraseAllButton;
 	ColorButton *blueButton;
 	ColorButton *greenButton;
 	ColorButton *orangeButton;
@@ -36,6 +36,7 @@
 }
 - (void)eraseAll;
 -(void)changeColorWithColor:(UIColor *)color;
+-(void)notErasingAnymore;
 
 @property (nonatomic, retain) NSMutableArray *strokes;
 @property (nonatomic, retain) UIColor *myColor;

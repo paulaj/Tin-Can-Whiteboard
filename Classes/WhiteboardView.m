@@ -8,7 +8,7 @@
 
 #import "WhiteboardView.h"
 #import <math.h>
-#import "Button.h"
+#import "EraserButton.h"
 #import "EraseAllButton.h"
 
 @implementation WhiteboardView
@@ -27,20 +27,20 @@
 		mySize=0;
 		activeStrokes =CFDictionaryCreateMutable(NULL,0,NULL,NULL);
 		
-		blueButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_blue.png"] withFrame: CGRectMake(100, 50, 50, 50) withColor:[UIColor blueColor]] retain];
-		greenButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_green.png"] withFrame: CGRectMake(200, 50, 50, 50) withColor:[UIColor greenColor]] retain];
-		orangeButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_orange.png"] withFrame: CGRectMake(300, 50, 50, 50) withColor:[UIColor orangeColor]] retain];
-		purpleButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_purple.png"] withFrame: CGRectMake(400, 50, 50, 50) withColor:[UIColor purpleColor]] retain];
-		redButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_red.png"] withFrame: CGRectMake(500, 50, 50, 50) withColor:[UIColor redColor]] retain];
-		whiteButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_white.png"] withFrame: CGRectMake(600, 50, 50, 50) withColor:[UIColor whiteColor]] retain];
-		yellowButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_yellow.png"] withFrame: CGRectMake(0, 50, 50, 50) withColor:[UIColor yellowColor]] retain];
+		blueButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_blue.png"] withFrame: CGRectMake(710, 50, 50, 50) withColor:[UIColor blueColor]] retain];
+		greenButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_green.png"] withFrame: CGRectMake(710, 150, 50, 50) withColor:[UIColor greenColor]] retain];
+		orangeButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_orange.png"] withFrame: CGRectMake(710, 250, 50, 50) withColor:[UIColor orangeColor]] retain];
+		purpleButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_purple.png"] withFrame: CGRectMake(710, 350, 50, 50) withColor:[UIColor purpleColor]] retain];
+		redButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_red.png"] withFrame: CGRectMake(710, 450, 50, 50) withColor:[UIColor redColor]] retain];
+		whiteButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_white.png"] withFrame: CGRectMake(710, 550, 50, 50) withColor:[UIColor whiteColor]] retain];
+		yellowButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_yellow.png"] withFrame: CGRectMake(710, 650, 50, 50) withColor:[UIColor yellowColor]] retain];
 		
 
-		button=[[[Button alloc] initWithImage:[UIImage imageNamed:@"page_white_paint.png"] withFrame: CGRectMake(725, 60, 30, 30)] retain];
-		eraseButton=[[[EraseAllButton alloc] initWithImage:[UIImage imageNamed:@"arrow_refresh.png"] withFrame: CGRectMake(675, 60, 30, 30)] retain];
+		eraserButton=[[[EraserButton alloc] initWithImage:[UIImage imageNamed:@"wrench.png"] withFrame: CGRectMake(720, 750, 30, 30)] retain];
+		eraseAllButton=[[[EraseAllButton alloc] initWithImage:[UIImage imageNamed:@"arrow_refresh.png"] withFrame: CGRectMake(720, 850, 30, 30)] retain];
 		
-		[self addSubview:button];
-		[self addSubview:eraseButton];
+		[self addSubview:eraserButton];
+		[self addSubview:eraseAllButton];
 		[self addSubview:blueButton];
 		[self addSubview:greenButton];
 		[self addSubview:orangeButton];
@@ -117,7 +117,10 @@
 		[strokes removeAllObjects]; 
 		[self setNeedsDisplay];
 }
-	
+-(void)notErasingAnymore{
+	eraserButton.isErasing=false;
+	[self setNeedsDisplay];
+}	
 -(void)changeColorWithColor:(UIColor *)color{
 	myColor = color; 
 	NSLog(@" setting color to %@:", myColor);
@@ -128,7 +131,7 @@
 	//NSLog(@"touches began");
 	
 	if ([[event allTouches] count] > 0) {
-		if (button.isErasing==true ){
+		if (eraserButton.isErasing==true ){
 				lastLocation=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
 				mySize=20;
 				NSMutableArray *newStroke = [self makeNewStrokeWithColor:[UIColor blackColor] withWidth:mySize];
@@ -162,7 +165,7 @@
 	//UITouch *touch = [[event allTouches] anyObject];
 	//NSLog(@"Color %@:", myColor);
 	
-	if (button.isErasing){	
+	if (eraserButton.isErasing){	
 		location=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
 		//CGPoint point2=[[[[event allTouches] allObjects] objectAtIndex:1] locationInView:self];
 		[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.x]];
@@ -209,7 +212,7 @@
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
 	//UITouch *touch = [[event allTouches] anyObject];
 	
-	if (button.isErasing==false){
+	if (eraserButton.isErasing==false){
 	for (int i =0; i < [[event allTouches] count]; i++) {
 		//NSLog(@"End");
 		UITouch *currentTouch = [[[event allTouches] allObjects] objectAtIndex:i];
@@ -222,7 +225,7 @@
 		CFDictionaryRemoveValue (activeStrokes, currentTouch);		
 	}
 	}
-	if(button.isErasing){
+	if(eraserButton.isErasing){
 		location=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
 
 		[[[strokes lastObject] lastObject] addObject:[NSNumber numberWithFloat: location.x]];

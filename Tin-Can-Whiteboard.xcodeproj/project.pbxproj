@@ -15,7 +15,7 @@
 		2899E5220DE3E06400AC0155 /* Tin_Can_WhiteboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* Tin_Can_WhiteboardViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* Tin_Can_WhiteboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* Tin_Can_WhiteboardViewController.m */; };
-		DA24ABD711BEC394001EA3A6 /* Button.m in Sources */ = {isa = PBXBuildFile; fileRef = DA24ABD611BEC394001EA3A6 /* Button.m */; };
+		DA24ABD711BEC394001EA3A6 /* EraserButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA24ABD611BEC394001EA3A6 /* EraserButton.m */; };
 		DA24ACD411BFD7C9001EA3A6 /* EraseAllButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA24ACD311BFD7C9001EA3A6 /* EraseAllButton.m */; };
 		DA24AEB211C01941001EA3A6 /* arrow_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24AEAC11C01941001EA3A6 /* arrow_refresh.png */; };
 		DA24AEB311C01941001EA3A6 /* color_swatch.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24AEAD11C01941001EA3A6 /* color_swatch.png */; };
@@ -53,8 +53,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Tin_Can_Whiteboard_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tin_Can_Whiteboard_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Tin_Can_Whiteboard-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Tin_Can_Whiteboard-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		DA24ABD511BEC394001EA3A6 /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Button.h; sourceTree = "<group>"; };
-		DA24ABD611BEC394001EA3A6 /* Button.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Button.m; sourceTree = "<group>"; };
+		DA24ABD511BEC394001EA3A6 /* EraserButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EraserButton.h; sourceTree = "<group>"; };
+		DA24ABD611BEC394001EA3A6 /* EraserButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EraserButton.m; sourceTree = "<group>"; };
 		DA24ACD211BFD7C9001EA3A6 /* EraseAllButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EraseAllButton.h; sourceTree = "<group>"; };
 		DA24ACD311BFD7C9001EA3A6 /* EraseAllButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EraseAllButton.m; sourceTree = "<group>"; };
 		DA24AEAC11C01941001EA3A6 /* arrow_refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrow_refresh.png; path = "../../Desktop/Tin-Can-Whiteboard/arrow_refresh.png"; sourceTree = SOURCE_ROOT; };
@@ -122,8 +122,8 @@
 				28D7ACF70DDB3853001CB0EB /* Tin_Can_WhiteboardViewController.m */,
 				DAFEB76B11B570F10050A558 /* WhiteboardView.h */,
 				DAFEB76C11B570F10050A558 /* WhiteboardView.m */,
-				DA24ABD511BEC394001EA3A6 /* Button.h */,
-				DA24ABD611BEC394001EA3A6 /* Button.m */,
+				DA24ABD511BEC394001EA3A6 /* EraserButton.h */,
+				DA24ABD611BEC394001EA3A6 /* EraserButton.m */,
 				DA24ACD211BFD7C9001EA3A6 /* EraseAllButton.h */,
 				DA24ACD311BFD7C9001EA3A6 /* EraseAllButton.m */,
 				DA24AEC711C024D8001EA3A6 /* ColorButton.h */,
@@ -264,7 +264,7 @@
 				1D3623260D0F684500981E51 /* Tin_Can_WhiteboardAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* Tin_Can_WhiteboardViewController.m in Sources */,
 				DAFEB76D11B570F10050A558 /* WhiteboardView.m in Sources */,
-				DA24ABD711BEC394001EA3A6 /* Button.m in Sources */,
+				DA24ABD711BEC394001EA3A6 /* EraserButton.m in Sources */,
 				DA24ACD411BFD7C9001EA3A6 /* EraseAllButton.m in Sources */,
 				DA24AEC911C024D8001EA3A6 /* ColorButton.m in Sources */,
 			);
