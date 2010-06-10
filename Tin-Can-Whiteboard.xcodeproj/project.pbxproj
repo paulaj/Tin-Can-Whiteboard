@@ -36,6 +36,10 @@
 		DA24AF0611C02D89001EA3A6 /* bullet_red.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24AEFF11C02D89001EA3A6 /* bullet_red.png */; };
 		DA24AF0711C02D89001EA3A6 /* bullet_white.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24AF0011C02D89001EA3A6 /* bullet_white.png */; };
 		DA24AF0811C02D89001EA3A6 /* bullet_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24AF0111C02D89001EA3A6 /* bullet_yellow.png */; };
+		DA24AFB111C139F8001EA3A6 /* SizeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DA24AFB011C139F8001EA3A6 /* SizeButton.m */; };
+		DA24AFBF11C13E4C001EA3A6 /* tab.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24AFBE11C13E4C001EA3A6 /* tab.png */; };
+		DA24AFC111C13E8B001EA3A6 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24AFC011C13E8B001EA3A6 /* add.png */; };
+		DA24AFC311C13EA9001EA3A6 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = DA24AFC211C13EA9001EA3A6 /* delete.png */; };
 		DAFEB76D11B570F10050A558 /* WhiteboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEB76C11B570F10050A558 /* WhiteboardView.m */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +81,11 @@
 		DA24AEFF11C02D89001EA3A6 /* bullet_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bullet_red.png; path = "../../Desktop/Tin-Can-Whiteboard/bullet_red.png"; sourceTree = SOURCE_ROOT; };
 		DA24AF0011C02D89001EA3A6 /* bullet_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bullet_white.png; path = "../../Desktop/Tin-Can-Whiteboard/bullet_white.png"; sourceTree = SOURCE_ROOT; };
 		DA24AF0111C02D89001EA3A6 /* bullet_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bullet_yellow.png; path = "../../Desktop/Tin-Can-Whiteboard/bullet_yellow.png"; sourceTree = SOURCE_ROOT; };
+		DA24AFAF11C139F8001EA3A6 /* SizeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SizeButton.h; sourceTree = "<group>"; };
+		DA24AFB011C139F8001EA3A6 /* SizeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SizeButton.m; sourceTree = "<group>"; };
+		DA24AFBE11C13E4C001EA3A6 /* tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab.png; path = "../../Desktop/Tin-Can-Whiteboard/tab.png"; sourceTree = SOURCE_ROOT; };
+		DA24AFC011C13E8B001EA3A6 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add.png; path = "../../Desktop/Tin-Can-Whiteboard/add.png"; sourceTree = SOURCE_ROOT; };
+		DA24AFC211C13EA9001EA3A6 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = delete.png; path = "../../Desktop/Tin-Can-Whiteboard/delete.png"; sourceTree = SOURCE_ROOT; };
 		DAFEB76B11B570F10050A558 /* WhiteboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteboardView.h; sourceTree = "<group>"; };
 		DAFEB76C11B570F10050A558 /* WhiteboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = WhiteboardView.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 1; };
 /* End PBXFileReference section */
@@ -101,13 +110,16 @@
 				DA24AEAC11C01941001EA3A6 /* arrow_refresh.png */,
 				DA24AEAD11C01941001EA3A6 /* color_swatch.png */,
 				DA24AEAE11C01941001EA3A6 /* page_white_paintbrush.png */,
+				DA24AFBE11C13E4C001EA3A6 /* tab.png */,
 				DA24AEB811C01948001EA3A6 /* page_white_paint.png */,
 				DA24AEB911C01948001EA3A6 /* page_white_paintbrush 2.png */,
 				DA24AEC011C0194D001EA3A6 /* wrench.png */,
 				DA24AEBA11C01948001EA3A6 /* palette.png */,
 				DA24AEFB11C02D89001EA3A6 /* bullet_blue.png */,
+				DA24AFC011C13E8B001EA3A6 /* add.png */,
 				DA24AEFC11C02D89001EA3A6 /* bullet_green.png */,
 				DA24AEFD11C02D89001EA3A6 /* bullet_orange.png */,
+				DA24AFC211C13EA9001EA3A6 /* delete.png */,
 				DA24AEFE11C02D89001EA3A6 /* bullet_purple.png */,
 				DA24AEFF11C02D89001EA3A6 /* bullet_red.png */,
 				DA24AF0011C02D89001EA3A6 /* bullet_white.png */,
@@ -126,6 +138,8 @@
 				DA24ABD611BEC394001EA3A6 /* EraserButton.m */,
 				DA24ACD211BFD7C9001EA3A6 /* EraseAllButton.h */,
 				DA24ACD311BFD7C9001EA3A6 /* EraseAllButton.m */,
+				DA24AFAF11C139F8001EA3A6 /* SizeButton.h */,
+				DA24AFB011C139F8001EA3A6 /* SizeButton.m */,
 				DA24AEC711C024D8001EA3A6 /* ColorButton.h */,
 				DA24AEC811C024D8001EA3A6 /* ColorButton.m */,
 			);
@@ -250,6 +264,9 @@
 				DA24AF0611C02D89001EA3A6 /* bullet_red.png in Resources */,
 				DA24AF0711C02D89001EA3A6 /* bullet_white.png in Resources */,
 				DA24AF0811C02D89001EA3A6 /* bullet_yellow.png in Resources */,
+				DA24AFBF11C13E4C001EA3A6 /* tab.png in Resources */,
+				DA24AFC111C13E8B001EA3A6 /* add.png in Resources */,
+				DA24AFC311C13EA9001EA3A6 /* delete.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +284,7 @@
 				DA24ABD711BEC394001EA3A6 /* EraserButton.m in Sources */,
 				DA24ACD411BFD7C9001EA3A6 /* EraseAllButton.m in Sources */,
 				DA24AEC911C024D8001EA3A6 /* ColorButton.m in Sources */,
+				DA24AFB111C139F8001EA3A6 /* SizeButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

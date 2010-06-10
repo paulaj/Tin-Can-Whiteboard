@@ -10,9 +10,11 @@
 #import "EraserButton.h"
 #import "EraseAllButton.h"
 #import "ColorButton.h"
+#import "SizeButton.h"
 
 @class EraseAllButton;
 @class ColorButton;
+@class SizeButton;
 
 @interface WhiteboardView : UIView {
 	CGPoint startOfStroke;
@@ -31,12 +33,14 @@
 	ColorButton *redButton;
 	ColorButton *whiteButton;
 	ColorButton *yellowButton;
+	SizeButton *plusButton;
+	SizeButton *minusButton;
 	
 }
 - (void)eraseAll;
 -(void)changeColorWithColor:(UIColor *)color;
 -(void)notErasingAnymore;
-
+-(void)changeStrokeWidthWithDirection:(NSString *) direction;
 @property (nonatomic, retain) NSMutableArray *strokes;
 @property (nonatomic, retain) UIColor *currentStrokeColor;
 

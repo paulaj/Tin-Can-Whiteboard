@@ -51,7 +51,7 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	NSLog(@"touches began");
+	//NSLog(@"touches began");
 	eraser =true;
 	[self setNeedsDisplay];
 	
@@ -62,7 +62,7 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
 	eraser =false;
-	NSLog(@"End");
+	//NSLog(@"End");
 	[(WhiteboardView *)self.superview eraseAll];
 	[self setNeedsDisplay];
 	
