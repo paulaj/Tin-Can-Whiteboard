@@ -65,10 +65,7 @@
 		CGContextFillRect(ctx, CGRectMake(0, 0, 768, 1024));
 		
 		}
-		CGContextSetFillColorWithColor(ctx, currentStrokeColor.CGColor);
-		CGContextAddEllipseInRect(ctx, CGRectMake(	400, 60, currentStrokeWidth, currentStrokeWidth));
-		CGContextFillPath(ctx);	
-		if ([strokes count] >0) { //under the condition that there is something in our Array
+				if ([strokes count] >0) { //under the condition that there is something in our Array
 			
 			for (int c=0; c< [strokes count]; c++) {//as long as we don't go past the number of available objects
 				NSArray *storedInfo=[strokes objectAtIndex:c];//lets name the array at that index 
@@ -105,6 +102,11 @@
 				}
 			}
 		}
+	CGContextSetFillColorWithColor(ctx, currentStrokeColor.CGColor);
+	//CGContextAddEllipseInRect(ctx, CGRectMake(	400, 60, currentStrokeWidth, currentStrokeWidth));
+	CGContextAddArc(ctx, 410, 75, currentStrokeWidth/2.0, 0, 2* M_PI, 0);
+	CGContextFillPath(ctx);	
+	
 	}
 
  
@@ -140,12 +142,12 @@
 
 
 -(void)changeStrokeWidthWithDirection:(NSString *) directionOfChange{
-	if (directionOfChange==@"+"){
+	if ((directionOfChange==@"+") & (currentStrokeWidth<80)){
 		currentStrokeWidth=currentStrokeWidth+1; 
 		NSLog(@" changing size up to %d:", currentStrokeWidth);
 		
 		}
-	else{
+	else if ((directionOfChange==@"-") & (currentStrokeWidth>1)){
 		currentStrokeWidth=currentStrokeWidth-1; 
 		NSLog(@" changing size down to %d:", currentStrokeWidth);
 		
