@@ -21,10 +21,11 @@
         startOfStroke =CGPointMake(0.0, 0.0);
 		location =CGPointMake(0.0, 0.0);
 		strokes = [[NSMutableArray array] retain];
+		activeStrokes =CFDictionaryCreateMutable(NULL,0,NULL,NULL);
 		
 		currentStrokeColor= [UIColor blueColor];
 		currentStrokeWidth=3.0;
-		activeStrokes =CFDictionaryCreateMutable(NULL,0,NULL,NULL);
+		
 		
 		blueButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_blue.png"] withFrame: CGRectMake(710, 50, 50, 50) withColor:[UIColor blueColor]] retain];
 		greenButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_green.png"] withFrame: CGRectMake(710, 200, 50, 50) withColor:[UIColor greenColor]] retain];
@@ -39,6 +40,8 @@
 		eraseAllButton=[[[EraseAllButton alloc] initWithImage:[UIImage imageNamed:@"arrow_refresh.png"] withFrame: CGRectMake(200, 60, 30, 30)] retain];
 		plusButton=[[[SizeButton alloc] initWithImage:[UIImage imageNamed:@"add.png"] withFrame: CGRectMake(300, 60, 30, 30) withDirectionOfChange: @"+"] retain];
 		minusButton=[[[SizeButton alloc] initWithImage:[UIImage imageNamed:@"delete.png"] withFrame: CGRectMake(500, 60, 30, 30) withDirectionOfChange:@"-"] retain];
+		frameOfButtonLocator= blueButton.frame;
+		
 		[self addSubview:eraserButton];
 		[self addSubview:eraseAllButton];
 		[self addSubview:blueButton];
@@ -103,9 +106,14 @@
 			}
 		}
 	CGContextSetFillColorWithColor(ctx, currentStrokeColor.CGColor);
+	CGContextSetStrokeColorWithColor(ctx, currentStrokeColor.CGColor);
 	//CGContextAddEllipseInRect(ctx, CGRectMake(	400, 60, currentStrokeWidth, currentStrokeWidth));
 	CGContextAddArc(ctx, 410, 75, currentStrokeWidth/2.0, 0, 2* M_PI, 0);
 	CGContextFillPath(ctx);	
+	CGContextStrokePath(ctx);
+	CGContextStrokeRect(ctx,frameOfButtonLocator);
+	CGContextFillPath(ctx);	
+	CGContextStrokePath(ctx);	
 	
 	}
 

@@ -24,6 +24,8 @@
 	UIColor *currentStrokeColor;
 	NSInteger currentStrokeWidth;
 	CFMutableDictionaryRef activeStrokes;
+	
+	CGRect frameOfButtonLocator;
 	EraserButton *eraserButton;
 	EraseAllButton *eraseAllButton;
 	ColorButton *blueButton;
