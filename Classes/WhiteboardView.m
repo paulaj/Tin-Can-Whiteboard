@@ -164,8 +164,7 @@
 	if ([[event allTouches] count] > 0) {
 		if (eraserButton.isErasing==true ){
 				startOfStroke=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
-				currentStrokeWidth=20;
-				NSMutableArray *newStroke = [self makeNewStrokeWithColor:[UIColor blackColor] withWidth:currentStrokeWidth];
+				NSMutableArray *newStroke = [self makeNewStrokeWithColor:[UIColor blackColor] withWidth:20];
 			
 				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: startOfStroke.x]];
 				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: startOfStroke.y]];
