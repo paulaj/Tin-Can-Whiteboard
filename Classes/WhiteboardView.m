@@ -105,19 +105,18 @@
 				}
 			}
 		}
+	
 	CGContextSetStrokeColorWithColor(ctx, currentStrokeColor.CGColor);
-	CGContextSetFillColorWithColor(ctx, [UIColor blackColor].CGColor);
-	CGContextStrokeRect(ctx,frameOfButtonLocator);
-	CGContextFillPath(ctx);	
-	CGContextStrokePath(ctx);
-	
 	CGContextSetFillColorWithColor(ctx, currentStrokeColor.CGColor);
-	
 	//CGContextAddEllipseInRect(ctx, CGRectMake(	400, 60, currentStrokeWidth, currentStrokeWidth));
 	CGContextAddArc(ctx, 410, 75, currentStrokeWidth/2.0, 0, 2* M_PI, 0);
 	CGContextFillPath(ctx);	
 	CGContextStrokePath(ctx);	
-	
+	CGContextSetFillColorWithColor(ctx, [UIColor blackColor].CGColor);
+	CGContextSetStrokeColorWithColor(ctx,[UIColor whiteColor].CGColor);
+	CGContextSetLineWidth(ctx, 4);
+	CGContextStrokeRect(ctx,frameOfButtonLocator);
+	CGContextStrokePath(ctx);
 	}
 
  
