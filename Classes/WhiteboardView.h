@@ -15,13 +15,12 @@
 @class ColorButton;
 
 @interface WhiteboardView : UIView {
-	CGPoint lastLocation;
+	CGPoint startOfStroke;
 	CGPoint location;
 	NSMutableArray *strokes;
 	
-	UIColor *myColor;
-	CGFloat myDistance;
-	NSInteger mySize;
+	UIColor *currentStrokeColor;
+	NSInteger currentStrokeWidth;
 	CFMutableDictionaryRef activeStrokes;
 	EraserButton *eraserButton;
 	EraseAllButton *eraseAllButton;
@@ -39,7 +38,7 @@
 -(void)notErasingAnymore;
 
 @property (nonatomic, retain) NSMutableArray *strokes;
-@property (nonatomic, retain) UIColor *myColor;
+@property (nonatomic, retain) UIColor *currentStrokeColor;
 
 
 @end

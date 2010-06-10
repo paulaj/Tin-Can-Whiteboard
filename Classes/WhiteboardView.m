@@ -14,17 +14,17 @@
 @implementation WhiteboardView
 
 @synthesize strokes;
-@synthesize myColor;
+@synthesize currentStrokeColor;
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
-        lastLocation =CGPointMake(0.0, 0.0);
+        startOfStroke =CGPointMake(0.0, 0.0);
 		location =CGPointMake(0.0, 0.0);
 		strokes = [[NSMutableArray array] retain];
 		
-		myColor= [UIColor blueColor];
-		myDistance=0.0;
-		mySize=0;
+		currentStrokeColor= [UIColor blueColor];
+		//myDistance=0.0;
+		currentStrokeWidth=0;
 		activeStrokes =CFDictionaryCreateMutable(NULL,0,NULL,NULL);
 		
 		blueButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_blue.png"] withFrame: CGRectMake(710, 50, 50, 50) withColor:[UIColor blueColor]] retain];
@@ -76,7 +76,7 @@
 				}
 				else{
 					
-					//NSLog(@"Color %@:", myColor);
+					//NSLog(@"Color %@:", currentStrokeColor);
 					UIColor *currentStrokeColor =[storedInfo objectAtIndex:0];
 					CGContextSetStrokeColorWithColor(ctx, currentStrokeColor.CGColor);
 					//CGContextSetRGBStrokeColor(ctx, 1, 0, 0, 1);
@@ -122,8 +122,8 @@
 	[self setNeedsDisplay];
 }	
 -(void)changeColorWithColor:(UIColor *)color{
-	myColor = color; 
-	NSLog(@" setting color to %@:", myColor);
+	currentStrokeColor = color; 
+	NSLog(@" setting color to %@:", currentStrokeColor);
 	[self setNeedsDisplay];
 }	
 	
@@ -132,24 +132,24 @@
 	
 	if ([[event allTouches] count] > 0) {
 		if (eraserButton.isErasing==true ){
-				lastLocation=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
-				mySize=20;
-				NSMutableArray *newStroke = [self makeNewStrokeWithColor:[UIColor blackColor] withWidth:mySize];
+				startOfStroke=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
+				currentStrokeWidth=20;
+				NSMutableArray *newStroke = [self makeNewStrokeWithColor:[UIColor blackColor] withWidth:currentStrokeWidth];
 			
-				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.x]];
-				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.y]];
+				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: startOfStroke.x]];
+				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: startOfStroke.y]];
 				[strokes addObject: newStroke];
 		}
 		else{
 			for (UITouch *touch in [event allTouches]) {
 				
-				mySize=3;
-				lastLocation = [touch locationInView:self];
+				currentStrokeWidth=3;
+				startOfStroke = [touch locationInView:self];
 				//Make a new Stroke
-				NSMutableArray *newStroke = [self makeNewStrokeWithColor:myColor withWidth:mySize];
+				NSMutableArray *newStroke = [self makeNewStrokeWithColor:currentStrokeColor withWidth:currentStrokeWidth];
 		
-				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.x]];
-				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: lastLocation.y]];
+				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: startOfStroke.x]];
+				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: startOfStroke.y]];
 
 				CFDictionarySetValue(activeStrokes, touch, newStroke);
 				[strokes addObject: newStroke];
@@ -163,7 +163,7 @@
 	
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
 	//UITouch *touch = [[event allTouches] anyObject];
-	//NSLog(@"Color %@:", myColor);
+	//NSLog(@"Color %@:", currentStrokeColor);
 	
 	if (eraserButton.isErasing){	
 		location=[[[[event allTouches] allObjects] objectAtIndex:0] locationInView:self];
@@ -183,7 +183,7 @@
 			NSMutableArray *stroke= (NSMutableArray *)CFDictionaryGetValue (activeStrokes, currentTouch);
 			if (stroke == NULL) {
 				//NSLog(@"found new finger, making new stroke");
-				NSMutableArray *newStroke = [self makeNewStrokeWithColor:[UIColor blueColor] withWidth:3];
+				NSMutableArray *newStroke = [self makeNewStrokeWithColor:currentStrokeColor withWidth:3];
 				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: location.x]];
 				[[newStroke lastObject] addObject:[NSNumber numberWithFloat: location.y]];
 				
