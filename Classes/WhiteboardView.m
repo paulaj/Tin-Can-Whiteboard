@@ -36,10 +36,10 @@
 		yellowButton=[[[ColorButton alloc] initWithImage:[UIImage imageNamed:@"bullet_yellow.png"] withFrame: CGRectMake(710, 950, 50, 50) withColor:[UIColor yellowColor]] retain];
 		
 
-		eraserButton=[[[EraserButton alloc] initWithImage:[UIImage imageNamed:@"tab.png"] withFrame: CGRectMake(100, 60, 30, 30)] retain];
-		eraseAllButton=[[[EraseAllButton alloc] initWithImage:[UIImage imageNamed:@"arrow_refresh.png"] withFrame: CGRectMake(200, 60, 30, 30)] retain];
-		plusButton=[[[SizeButton alloc] initWithImage:[UIImage imageNamed:@"add.png"] withFrame: CGRectMake(300, 60, 30, 30) withDirectionOfChange: @"+"] retain];
-		minusButton=[[[SizeButton alloc] initWithImage:[UIImage imageNamed:@"delete.png"] withFrame: CGRectMake(500, 60, 30, 30) withDirectionOfChange:@"-"] retain];
+		eraserButton=[[[EraserButton alloc] initWithImage:[UIImage imageNamed:@"tab.png"] withFrame: CGRectMake(100, 60, 50, 50)] retain];
+		eraseAllButton=[[[EraseAllButton alloc] initWithImage:[UIImage imageNamed:@"arrow_refresh.png"] withFrame: CGRectMake(200, 60, 50, 50)] retain];
+		plusButton=[[[SizeButton alloc] initWithImage:[UIImage imageNamed:@"add.png"] withFrame: CGRectMake(300, 60, 50, 50) withDirectionOfChange: @"+"] retain];
+		minusButton=[[[SizeButton alloc] initWithImage:[UIImage imageNamed:@"delete.png"] withFrame: CGRectMake(500, 60, 50, 50) withDirectionOfChange:@"-"] retain];
 		frameOfButtonLocator= blueButton.frame;
 		
 		[self addSubview:eraserButton];
@@ -109,7 +109,7 @@
 	CGContextSetStrokeColorWithColor(ctx, currentStrokeColor.CGColor);
 	CGContextSetFillColorWithColor(ctx, currentStrokeColor.CGColor);
 	//CGContextAddEllipseInRect(ctx, CGRectMake(	400, 60, currentStrokeWidth, currentStrokeWidth));
-	CGContextAddArc(ctx, 410, 75, currentStrokeWidth/2.0, 0, 2* M_PI, 0);
+	CGContextAddArc(ctx, 420, 80, currentStrokeWidth/2.0, 0, 2* M_PI, 0);
 	CGContextFillPath(ctx);	
 	CGContextStrokePath(ctx);	
 	CGContextSetFillColorWithColor(ctx, [UIColor blackColor].CGColor);
